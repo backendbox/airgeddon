@@ -12775,7 +12775,13 @@ function env_vars_initialization() {
 									"AIRGEDDON_FORCE_IPTABLES"
 									"AIRGEDDON_DEVELOPMENT_MODE"
 									"AIRGEDDON_DEBUG_MODE"
+									"AIRGEDDON_WINDOWS_HANDLING"
 									)
+
+	declare -gA nonboolean_options_env_vars
+	nonboolean_options_env_vars["${ordered_options_env_vars[11]},default_value"]="xterm"
+
+	nonboolean_options_env_vars["${ordered_options_env_vars[11]},rcfile_text"]="#Available values: xterm, tmux - Define the needed tool for windows handling - Default value xterm"
 
 	declare -gA boolean_options_env_vars
 	boolean_options_env_vars["${ordered_options_env_vars[0]},default_value"]="true"
@@ -12836,6 +12842,8 @@ function env_vars_values_validation() {
 			export ${item}=${boolean_options_env_vars["${item}",'default_value']}
 		fi
 	done
+
+	#TODO check validations for non-boolean option env vars
 }
 
 #Print possible issues on configuration vars
@@ -12890,6 +12898,8 @@ function create_rcfile() {
 			fi
 			} >> "${scriptfolder}${rc_file}" 2> /dev/null
 		fi
+
+		#TODO add non-boolean var to file if needed
 	done
 }
 
