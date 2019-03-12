@@ -12759,6 +12759,7 @@ function recalculate_windows_sizes() {
 }
 
 #Initialization of env vars
+#shellcheck disable=SC2145
 function env_vars_initialization() {
 
 	debug_print
@@ -12834,10 +12835,10 @@ function env_vars_values_validation() {
 			if grep "${item}" "${scriptfolder}${rc_file}" > /dev/null; then
 				eval "export $(grep "${item}" "${scriptfolder}${rc_file}")"
 			else
-				if $(echo ${ARRAY_ENV_BOOLEAN_VARS_ELEMENTS[@]} | grep -q "${item}"); then
+				if echo "${ARRAY_ENV_BOOLEAN_VARS_ELEMENTS[@]}" | grep -q "${item}"; then
 					export ${item}=${boolean_options_env_vars["${item}",'default_value']}
 					errors_on_configuration_vars["${item},missing_var"]="${boolean_options_env_vars[${item},'default_value']}"
-				elif $(echo ${ARRAY_ENV_NONBOOLEAN_VARS_ELEMENTS[@]} | grep -q "${item}"); then
+				elif echo "${ARRAY_ENV_NONBOOLEAN_VARS_ELEMENTS[@]}" | grep -q "${item}"; then
 					export ${item}=${nonboolean_options_env_vars["${item}",'default_value']}
 					errors_on_configuration_vars["${item},missing_var"]="${nonboolean_options_env_vars[${item},'default_value']}"
 				fi
@@ -12905,7 +12906,7 @@ function create_rcfile() {
 	local counter=0
 	for item in "${ordered_options_env_vars[@]}"; do
 		counter=$((counter + 1))
-		if $(echo ${ARRAY_ENV_BOOLEAN_VARS_ELEMENTS[@]} | grep -q "${item}"); then
+		if echo "${ARRAY_ENV_BOOLEAN_VARS_ELEMENTS[@]}" | grep -q "${item}"; then
 			{
 			echo -e "${boolean_options_env_vars[${item},"rcfile_text"]}"
 			echo -e "${item}=${boolean_options_env_vars[${item},"default_value"]}"
@@ -12913,7 +12914,7 @@ function create_rcfile() {
 				echo -ne "\n"
 			fi
 			} >> "${scriptfolder}${rc_file}" 2> /dev/null
-		elif $(echo ${ARRAY_ENV_NONBOOLEAN_VARS_ELEMENTS[@]} | grep -q "${item}"); then
+		elif echo "${ARRAY_ENV_NONBOOLEAN_VARS_ELEMENTS[@]}" | grep -q "${item}"; then
 			{
 			echo -e "${nonboolean_options_env_vars[${item},"rcfile_text"]}"
 			echo -e "${item}=${nonboolean_options_env_vars[${item},"default_value"]}"
