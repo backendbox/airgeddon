@@ -2,7 +2,7 @@
 #Title........: airgeddon.sh
 #Description..: This is a multi-use bash script for Linux systems to audit wireless networks.
 #Author.......: v1s1t0r
-#Date.........: 20190312
+#Date.........: 20190313
 #Version......: 9.11
 #Usage........: bash airgeddon.sh
 #Bash Version.: 4.2 or later
@@ -12808,8 +12808,12 @@ function env_vars_initialization() {
 	boolean_options_env_vars["${ordered_options_env_vars[9]},rcfile_text"]="#Enabled true / Disabled false - Development mode for faster development skipping intro and all initial checks - Default value ${boolean_options_env_vars[${ordered_options_env_vars[9]},'default_value']}"
 	boolean_options_env_vars["${ordered_options_env_vars[10]},rcfile_text"]="#Enabled true / Disabled false - Debug mode for development printing debug information - Default value ${boolean_options_env_vars[${ordered_options_env_vars[10]},'default_value']}"
 
-	readarray -t ENV_VARS_ELEMENTS < <(printf %s\\n "${!boolean_options_env_vars[@]}" | cut -d, -f1 | sort -u)
-	ENV_BOOLEAN_VARS_ELEMENTS=("${ENV_VARS_ELEMENTS[@]}")
+	readarray -t ENV_VARS_ELEMENTS < <(printf %s\\n "${!nonboolean_options_env_vars[@]} ${!boolean_options_env_vars[@]}" | cut -d, -f1 | sort -u)
+	readarray -t ENV_BOOLEAN_VARS_ELEMENTS < <(printf %s\\n "${!boolean_options_env_vars[@]}" | cut -d, -f1 | sort -u)
+	readarray -t ENV_NONBOOLEAN_VARS_ELEMENTS < <(printf %s\\n "${!nonboolean_options_env_vars[@]}" | cut -d, -f1 | sort -u)
+	ARRAY_ENV_VARS_ELEMENTS=("${ENV_VARS_ELEMENTS[@]}")
+	ARRAY_ENV_BOOLEAN_VARS_ELEMENTS=("${ENV_BOOLEAN_VARS_ELEMENTS[@]}")
+	ARRAY_ENV_NONBOOLEAN_VARS_ELEMENTS=("${ENV_NONBOOLEAN_VARS_ELEMENTS[@]}")
 
 	if [ ! -f "${scriptfolder}${rc_file}" ]; then
 		create_rcfile
@@ -12825,25 +12829,37 @@ function env_vars_values_validation() {
 
 	declare -gA errors_on_configuration_vars
 
-	for item in "${ENV_VARS_ELEMENTS[@]}"; do
+	for item in "${ARRAY_ENV_VARS_ELEMENTS[@]}"; do
 		if [ -z "${!item}" ]; then
 			if grep "${item}" "${scriptfolder}${rc_file}" > /dev/null; then
 				eval "export $(grep "${item}" "${scriptfolder}${rc_file}")"
 			else
-				export ${item}=${boolean_options_env_vars["${item}",'default_value']}
-				errors_on_configuration_vars["${item},missing_var"]="${boolean_options_env_vars[${item},'default_value']}"
+				if $(echo ${ARRAY_ENV_BOOLEAN_VARS_ELEMENTS[@]} | grep -q "${item}"); then
+					export ${item}=${boolean_options_env_vars["${item}",'default_value']}
+					errors_on_configuration_vars["${item},missing_var"]="${boolean_options_env_vars[${item},'default_value']}"
+				elif $(echo ${ARRAY_ENV_NONBOOLEAN_VARS_ELEMENTS[@]} | grep -q "${item}"); then
+					export ${item}=${nonboolean_options_env_vars["${item}",'default_value']}
+					errors_on_configuration_vars["${item},missing_var"]="${nonboolean_options_env_vars[${item},'default_value']}"
+				fi
 			fi
 		fi
 	done
 
-	for item in "${ENV_BOOLEAN_VARS_ELEMENTS[@]}"; do
+	for item in "${ARRAY_ENV_BOOLEAN_VARS_ELEMENTS[@]}"; do
 		if ! [[ "${!item,,}" =~ ^(true|false)$ ]]; then
 			errors_on_configuration_vars["${item},invalid_value"]="${boolean_options_env_vars[${item},'default_value']}"
 			export ${item}=${boolean_options_env_vars["${item}",'default_value']}
 		fi
 	done
 
-	#TODO check validations for non-boolean option env vars
+	for item in "${ARRAY_ENV_NONBOOLEAN_VARS_ELEMENTS[@]}"; do
+		if [ "${item}" = "AIRGEDDON_WINDOWS_HANDLING" ]; then
+			if ! [[ "${!item,,}" =~ ^(xterm|tmux)$ ]]; then
+				errors_on_configuration_vars["${item},invalid_value"]="${nonboolean_options_env_vars[${item},'default_value']}"
+				export ${item}=${nonboolean_options_env_vars["${item}",'default_value']}
+			fi
+		fi
+	done
 }
 
 #Print possible issues on configuration vars
@@ -12889,7 +12905,7 @@ function create_rcfile() {
 	local counter=0
 	for item in "${ordered_options_env_vars[@]}"; do
 		counter=$((counter + 1))
-		if [ -n "${ENV_BOOLEAN_VARS_ELEMENTS[${item}]}" ]; then
+		if $(echo ${ARRAY_ENV_BOOLEAN_VARS_ELEMENTS[@]} | grep -q "${item}"); then
 			{
 			echo -e "${boolean_options_env_vars[${item},"rcfile_text"]}"
 			echo -e "${item}=${boolean_options_env_vars[${item},"default_value"]}"
@@ -12897,9 +12913,15 @@ function create_rcfile() {
 				echo -ne "\n"
 			fi
 			} >> "${scriptfolder}${rc_file}" 2> /dev/null
+		elif $(echo ${ARRAY_ENV_NONBOOLEAN_VARS_ELEMENTS[@]} | grep -q "${item}"); then
+			{
+			echo -e "${nonboolean_options_env_vars[${item},"rcfile_text"]}"
+			echo -e "${item}=${nonboolean_options_env_vars[${item},"default_value"]}"
+			if [ ${counter} -ne ${#ordered_options_env_vars[@]} ]; then
+				echo -ne "\n"
+			fi
+			} >> "${scriptfolder}${rc_file}" 2> /dev/null
 		fi
-
-		#TODO add non-boolean var to file if needed
 	done
 }
 
@@ -12987,8 +13009,11 @@ function main() {
 
 	check_language_strings
 
-	check_xwindow_system
-	detect_screen_resolution
+	if [ "${AIRGEDDON_WINDOWS_HANDLING}" = "xterm" ]; then
+		check_xwindow_system
+		detect_screen_resolution
+	fi
+
 	set_possible_aliases
 	initialize_optional_tools_values
 
