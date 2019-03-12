@@ -1,3 +1,6 @@
+### 9.11
+ - Added option to use tmux instead of xterm
+
 ### 9.10
  - Mdk3 replaced by Mdk4
  - Fixed some minor bugs on enterprise plain text captured password process
