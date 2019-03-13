@@ -13013,6 +13013,10 @@ function main() {
 	if [ "${AIRGEDDON_WINDOWS_HANDLING}" = "xterm" ]; then
 		check_xwindow_system
 		detect_screen_resolution
+	else
+		essential_tools_names=(${essential_tools_names[@]/xterm/tmux})
+		possible_package_names[${essential_tools_names[7]}]="tmux"
+		unset possible_package_names["xterm"]
 	fi
 
 	set_possible_aliases
@@ -13046,18 +13050,20 @@ function main() {
 		check_bash_version
 		check_root_permissions
 
-		echo
-		if [[ ${resolution_detected} -eq 1 ]] && [[ "${xterm_ok}" -eq 1 ]]; then
-			language_strings "${language}" 294 "blue"
-		else
-			if [ "${xterm_ok}" -eq 0 ]; then
-				language_strings "${language}" 476 "red"
-				exit_code=1
-				exit_script_option
+		if [ "${AIRGEDDON_WINDOWS_HANDLING}" = "xterm" ]; then
+			echo
+			if [[ ${resolution_detected} -eq 1 ]] && [[ "${xterm_ok}" -eq 1 ]]; then
+				language_strings "${language}" 294 "blue"
 			else
-				language_strings "${language}" 295 "red"
-				echo
-				language_strings "${language}" 300 "yellow"
+				if [ "${xterm_ok}" -eq 0 ]; then
+					language_strings "${language}" 476 "red"
+					exit_code=1
+					exit_script_option
+				else
+					language_strings "${language}" 295 "red"
+					echo
+					language_strings "${language}" 300 "yellow"
+				fi
 			fi
 		fi
 
