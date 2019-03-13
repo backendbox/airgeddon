@@ -2,7 +2,7 @@
 #Title........: language_strings.sh
 #Description..: All the translated strings that airgeddon uses are located here.
 #Author.......: v1s1t0r
-#Date.........: 20190312
+#Date.........: 20190314
 #Bash Version.: 4.2 or later
 
 #Set language_strings file version
@@ -6214,17 +6214,17 @@ function language_strings() {
 	arr["GERMAN",446]="0.  Zum Optionsmenü zurückkehren"
 	arr["TURKISH",446]="0.  Ayarlar menüsüne geri dön"
 
-	arr["ENGLISH",447]="10. Set permanently airgeddon's language to the current one"
-	arr["SPANISH",447]="10. Cambiar permanentemente el idioma de airgeddon al actual"
-	arr["FRENCH",447]="10. Etablir comme langue permanente d'airgeddon celle utilisée actuellement"
-	arr["CATALAN",447]="10. Canviar permanentment l'idioma de airgeddon a l'actual"
-	arr["PORTUGUESE",447]="10. Alterar permanentemente o idioma do airgeddon para o atual"
-	arr["RUSSIAN",447]="10. Сделать текущий язык airgeddon постоянным"
-	arr["GREEK",447]="10. Θέστε μόνιμα την τρέχουσα γλώσσα του airgeddon ως προεπιλεγμένη"
-	arr["ITALIAN",447]="10. Modificare in modo permanente la lingua di airgeddon a quella attuale"
-	arr["POLISH",447]="10. Trwale ustaw język airgeddon na aktualny"
-	arr["GERMAN",447]="10. Ändern Sie dauerhaft die Sprache von airgeddon zur aktuellen Sprache"
-	arr["TURKISH",447]="10. Sürekli olarak airgeddon'un dilini geçerli olana ayarla"
+	arr["ENGLISH",447]="11. Set permanently airgeddon's language to the current one"
+	arr["SPANISH",447]="11. Cambiar permanentemente el idioma de airgeddon al actual"
+	arr["FRENCH",447]="11. Etablir comme langue permanente d'airgeddon celle utilisée actuellement"
+	arr["CATALAN",447]="11. Canviar permanentment l'idioma de airgeddon a l'actual"
+	arr["PORTUGUESE",447]="11. Alterar permanentemente o idioma do airgeddon para o atual"
+	arr["RUSSIAN",447]="11. Сделать текущий язык airgeddon постоянным"
+	arr["GREEK",447]="11. Θέστε μόνιμα την τρέχουσα γλώσσα του airgeddon ως προεπιλεγμένη"
+	arr["ITALIAN",447]="11. Modificare in modo permanente la lingua di airgeddon a quella attuale"
+	arr["POLISH",447]="11. Trwale ustaw język airgeddon na aktualny"
+	arr["GERMAN",447]="11. Ändern Sie dauerhaft die Sprache von airgeddon zur aktuellen Sprache"
+	arr["TURKISH",447]="11. Sürekli olarak airgeddon'un dilini geçerli olana ayarla"
 
 	arr["ENGLISH",448]="If you installed airgeddon from a repository, you should not enable automatic updates. airgeddon will be updated when there is a new version in the repository"
 	arr["SPANISH",448]="Si instalaste airgeddon desde un repositorio, no deberías activar la actualización automática. airgeddon se actualizará cuando haya una nueva versión en el repositorio"
@@ -7970,7 +7970,7 @@ function language_strings() {
 	arr["SPANISH",593]="9.  Habilitar 5Ghz permanentemente"
 	arr["FRENCH",593]="9.  Activer 5Ghz en permanence"
 	arr["CATALAN",593]="9.  Habilitar 5Ghz permanentment"
-	arr["PORTUGUESE",593]="9.  Ativar permanentemente a banda de 5Ghz "
+	arr["PORTUGUESE",593]="9.  Ativar permanentemente a banda de 5Ghz"
 	arr["RUSSIAN",593]="9. Включить 5Ghz, в том числе для последующих запусков"
 	arr["GREEK",593]="9.  Ενεργοποιήστε μόνιμα το 5Ghz"
 	arr["ITALIAN",593]="9.  Attivare 5Ghz permanentemente"
@@ -8241,6 +8241,54 @@ function language_strings() {
 	arr["POLISH",615]="Wystąpił błąd konfiguracji. Sprawdź plik ${rc_file}. Aktywowałeś opcję wymuszania użycia iptables zamiast nftables (${normal_color}AIRGEDDON_FORCE_IPTABLES${red_color}), ale twój system nie ma zainstalowanego iptables. Wyłącz tę opcję lub zainstaluj iptables, aby rozwiązać problem"
 	arr["GERMAN",615]="Ein Fehler wurde in Ihren Einstellungen gefunden. Bitte überprüfen Sie die Datei ${rc_file}. Sie haben die Option aktiviert, um die Verwendung von iptables anstelle von nftables zu erzwingen (${normal_color}AIRGEDDON_FORCE_IPTABLES${red_color}), aber auf Ihrem System sind iptables nicht installiert. Deaktivieren Sie diese Option oder installieren Sie iptables, um das Problem zu lösen"
 	arr["TURKISH",615]="${pending_of_translation} Yapılandırmanızda bir hata var. Lütfen ${rc_file} dosyasını kontrol edin. Nftables (${normal_color}AIRGEDDON_FORCE_IPTABLES${red_color}) yerine iptables kullanımını zorlama seçeneğini etkinleştirdiniz, ancak sisteminizde iptables kurulu değil. Bu seçeneği devre dışı bırakın veya sorunu çözmek için iptables yükleyin"
+
+	arr["ENGLISH",616]="10. Change windows handling method to tmux"
+	arr["SPANISH",616]="10. Cambiar el método de manejo de ventanas a tmux"
+	arr["FRENCH",616]="${pending_of_translation} 10. Changer la méthode de gestion de la fenêtre en tmux"
+	arr["CATALAN",616]="${pending_of_translation} 10. Canviar el mètode de maneig de finestres a tmux"
+	arr["PORTUGUESE",616]="${pending_of_translation} 10. Altere o método de gerenciamento de janela para tmux"
+	arr["RUSSIAN",616]="${pending_of_translation} 10. Измените метод управления окнами на tmux"
+	arr["GREEK",616]="${pending_of_translation} 10. Αλλάξτε τη μέθοδο διαχείρισης παραθύρων σε tmux"
+	arr["ITALIAN",616]="${pending_of_translation} 10. Cambia il metodo di gestione delle finestre in tmux"
+	arr["POLISH",616]="${pending_of_translation} 10. Zmień metodę zarządzania oknami na tmux"
+	arr["GERMAN",616]="${pending_of_translation} 10. Ändern Sie die Methode der Fensterverwaltung in tmux"
+	arr["TURKISH",616]="${pending_of_translation} 10. Pencere yönetimi yöntemini tmux olarak değiştirin"
+
+	arr["ENGLISH",617]="10. Change windows handling method to xterm"
+	arr["SPANISH",617]="10. Cambiar el método de manejo de ventanas a xterm"
+	arr["FRENCH",617]="${pending_of_translation} 10. Changer la méthode de gestion de la fenêtre en xterm"
+	arr["CATALAN",617]="${pending_of_translation} 10. Canviar el mètode de maneig de finestres a xterm"
+	arr["PORTUGUESE",617]="${pending_of_translation} 10. Altere o método de gerenciamento de janela para xterm"
+	arr["RUSSIAN",617]="${pending_of_translation} 10. Измените метод управления окнами на xterm"
+	arr["GREEK",617]="${pending_of_translation} 10. Αλλάξτε τη μέθοδο διαχείρισης παραθύρων σε xterm"
+	arr["ITALIAN",617]="${pending_of_translation} 10. Cambia il metodo di gestione delle finestre in xterm"
+	arr["POLISH",617]="${pending_of_translation} 10. Zmień metodę zarządzania oknami na xterm"
+	arr["GERMAN",617]="${pending_of_translation} 10. Ändern Sie die Methode der Fensterverwaltung in xterm"
+	arr["TURKISH",617]="${pending_of_translation} 10. Pencere yönetimi yöntemini xterm olarak değiştirin"
+
+	arr["ENGLISH",618]="Windows handling: ${pink_color}xterm${normal_color}"
+	arr["SPANISH",618]="Manejo de ventanas: ${pink_color}xterm${normal_color}"
+	arr["FRENCH",618]="${pending_of_translation} Gestion de la fenêtre: ${pink_color}xterm${normal_color}"
+	arr["CATALAN",618]="${pending_of_translation} Maneig de finestres: ${pink_color}xterm${normal_color}"
+	arr["PORTUGUESE",618]="${pending_of_translation} Gerenciamento de janelas: ${pink_color}xterm${normal_color}"
+	arr["RUSSIAN",618]="${pending_of_translation} Управление окнами: ${pink_color}xterm${normal_color}"
+	arr["GREEK",618]="${pending_of_translation} Διαχείριση παραθύρων: ${pink_color}xterm${normal_color}"
+	arr["ITALIAN",618]="${pending_of_translation} Gestione delle finestre: ${pink_color}xterm${normal_color}"
+	arr["POLISH",618]="${pending_of_translation} Zarządzanie oknami: ${pink_color}xterm${normal_color}"
+	arr["GERMAN",618]="${pending_of_translation} Fensterverwaltung: ${pink_color}xterm${normal_color}"
+	arr["TURKISH",618]="${pending_of_translation} Pencere yönetimi: ${pink_color}xterm${normal_color}"
+
+	arr["ENGLISH",619]="Windows handling: ${pink_color}tmux${normal_color}"
+	arr["SPANISH",619]="Manejo de ventanas: ${pink_color}tmux${normal_color}"
+	arr["FRENCH",619]="${pending_of_translation} Gestion de la fenêtre: ${pink_color}tmux${normal_color}"
+	arr["CATALAN",619]="${pending_of_translation} Maneig de finestres: ${pink_color}tmux${normal_color}"
+	arr["PORTUGUESE",619]="${pending_of_translation} Gerenciamento de janelas: ${pink_color}tmux${normal_color}"
+	arr["RUSSIAN",619]="${pending_of_translation} Управление окнами: ${pink_color}tmux${normal_color}"
+	arr["GREEK",619]="${pending_of_translation} Διαχείριση παραθύρων: ${pink_color}tmux${normal_color}"
+	arr["ITALIAN",619]="${pending_of_translation} Gestione delle finestre: ${pink_color}tmux${normal_color}"
+	arr["POLISH",619]="${pending_of_translation} Zarządzanie oknami: ${pink_color}tmux${normal_color}"
+	arr["GERMAN",619]="${pending_of_translation} Fensterverwaltung: ${pink_color}tmux${normal_color}"
+	arr["TURKISH",619]="${pending_of_translation} Pencere yönetimi: ${pink_color}tmux${normal_color}"
 
 	case "${3}" in
 		"yellow")

@@ -2,7 +2,7 @@
 #Title........: airgeddon.sh
 #Description..: This is a multi-use bash script for Linux systems to audit wireless networks.
 #Author.......: v1s1t0r
-#Date.........: 20190313
+#Date.........: 20190314
 #Version......: 9.11
 #Usage........: bash airgeddon.sh
 #Bash Version.: 4.2 or later
@@ -1593,6 +1593,11 @@ function option_menu() {
 	else
 		language_strings "${language}" 593
 	fi
+	if [ "${AIRGEDDON_WINDOWS_HANDLING}" = "xterm" ]; then
+		language_strings "${language}" 616
+	else
+		language_strings "${language}" 617
+	fi
 	language_strings "${language}" 447
 	print_hint ${current_menu}
 
@@ -1833,6 +1838,10 @@ function option_menu() {
 			fi
 		;;
 		10)
+			#TODO pending
+			under_construction_message
+		;;
+		11)
 			ask_yesno 478 "yes"
 			if [ "${yesno}" = "y" ]; then
 				get_current_permanent_language
@@ -3990,6 +3999,12 @@ function print_options() {
 		language_strings "${language}" 594 "blue"
 	else
 		language_strings "${language}" 595 "blue"
+	fi
+
+	if [ "${AIRGEDDON_WINDOWS_HANDLING}" = "xterm" ]; then
+		language_strings "${language}" 618 "blue"
+	else
+		language_strings "${language}" 619 "blue"
 	fi
 }
 
